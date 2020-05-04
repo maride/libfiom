@@ -1,5 +1,6 @@
 #define _GNU_SOURCE
 #include "close.h"
+#include "log.h"
 #include <stdio.h>
 #include <dlfcn.h>
 
@@ -9,7 +10,7 @@ int close(int fd) {
 		original_close = dlsym(RTLD_NEXT, "close");
 	}
 
-	printf("Closing file handle %i\n", fd);
+	logfmt("Closing file handle %i\n", fd);
 	return (*original_close)(fd);
 }
 

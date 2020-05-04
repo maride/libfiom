@@ -1,5 +1,6 @@
 #define _GNU_SOURCE
 #include "open.h"
+#include "log.h"
 #include <stdio.h>
 #include <dlfcn.h>
 
@@ -10,7 +11,7 @@ int open(const char *pathname, int flags) {
 	}
 
 	int fh = (*original_open)(pathname, flags);
-	printf("Opening file %s to file handle %i\n", pathname, fh);
+	logfmt("Opening file %s to file handle %i\n", pathname, fh);
 	return fh;
 }
 
