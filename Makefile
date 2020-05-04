@@ -4,9 +4,16 @@ OUTDIR=./out
 OUTFILE=libfiom
 TESTDIR=./test
 
-build:
+build: build-64 build-32
+
+build-preparation:
 	mkdir -p $(OUTDIR)
-	$(CC) -Wall -shared -o $(OUTDIR)/$(OUTFILE) src/*.c -ldl
+
+build-64: build-preparation
+	$(CC) -Wall -m64 -shared -o $(OUTDIR)/$(OUTFILE)-64.so src/*.c -ldl
+
+build-32: build-preparation
+	$(CC) -Wall -m32 -shared -o $(OUTDIR)/$(OUTFILE)-32.so src/*.c -ldl
 
 clean:
 	rm -rf $(OUTDIR)
@@ -16,6 +23,6 @@ test: build
 	mkdir -p $(TESTDIR)
 	uname -a > $(TESTDIR)/uname
 	echo "\n\n"
-	LD_PRELOAD=$(OUTDIR)/$(OUTFILE) cat $(TESTDIR)/uname
+	LD_PRELOAD=$(OUTDIR)/$(OUTFILE)-64.so cat $(TESTDIR)/uname
 	echo "\n\n"
 	rm -rf $(TESTDIR)
