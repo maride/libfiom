@@ -10,10 +10,10 @@ build-preparation:
 	mkdir -p $(OUTDIR)
 
 build-64: build-preparation
-	$(CC) -Wall -m64 -shared -o $(OUTDIR)/$(OUTFILE)-64.so src/*.c -ldl
+	$(CC) -Wall -m64 -shared -fPIC -o $(OUTDIR)/$(OUTFILE)-64.so src/*.c -ldl
 
 build-32: build-preparation
-	$(CC) -Wall -m32 -shared -o $(OUTDIR)/$(OUTFILE)-32.so src/*.c -ldl
+	$(CC) -Wall -m32 -shared -fPIC -o $(OUTDIR)/$(OUTFILE)-32.so src/*.c -ldl
 
 clean:
 	rm -rf $(OUTDIR)
