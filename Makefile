@@ -22,7 +22,8 @@ clean:
 test: build
 	mkdir -p $(TESTDIR)
 	uname -a > $(TESTDIR)/uname
+	uptime > $(TESTDIR)/uptime
 	echo "\n\n"
-	LD_PRELOAD=$(OUTDIR)/$(OUTFILE)-64.so cat $(TESTDIR)/uname
+	LD_PRELOAD=$(OUTDIR)/$(OUTFILE)-64.so cat $(TESTDIR)/uname $(TESTDIR)/uptime
 	echo "\n\n"
 	rm -rf $(TESTDIR)
