@@ -5,9 +5,12 @@
 #include <unistd.h>
 
 ssize_t write(int fd, const void *buf, size_t count) {
-	ssize_t (*original_fwrite)(int fd, const void *buf, size_t count);
-	original_fwrite = dlsym(RTLD_NEXT, "write");
-	ssize_t written = (*original_fwrite)(fd, buf, count);
+	// Link original function if not already linked
+	if(!original_write) {
+		original_write = dlsym(RTLD_NEXT, "write");
+	}
+
+	ssize_t written = (*original_write)(fd, buf, count);
 	printf("Write %li bytes to file handle %i\n", written, fd);
 	return written;
 }

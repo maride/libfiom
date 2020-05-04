@@ -4,10 +4,12 @@
 #include <dlfcn.h>
 
 int close(int fd) {
-	printf("Closing file handle %i\n", fd);
+	// Link original function if not already linked
+	if(!original_close) {
+		original_close = dlsym(RTLD_NEXT, "close");
+	}
 
-	int (*original_fclose)(int);
-	original_fclose = dlsym(RTLD_NEXT, "close");
-	return (*original_fclose)(fd);
+	printf("Closing file handle %i\n", fd);
+	return (*original_close)(fd);
 }
 
