@@ -1,10 +1,21 @@
-.PHONY: build clean
+.PHONY: build clean test
 
-OUT=./out
+OUTDIR=./out
+OUTFILE=libfiom
+TESTDIR=./test
 
 build:
-	mkdir -p $(OUT)
-	$(CC) -Wall -shared -o $(OUT)/libfiom src/*.c -ldl
+	mkdir -p $(OUTDIR)
+	$(CC) -Wall -shared -o $(OUTDIR)/$(OUTFILE) src/*.c -ldl
 
 clean:
-	rm -rf $(OUT)
+	rm -rf $(OUTDIR)
+	rm -rf $(TESTDIR)
+
+test: build
+	mkdir -p $(TESTDIR)
+	uname -a > $(TESTDIR)/uname
+	echo "\n\n"
+	LD_PRELOAD=$(OUTDIR)/$(OUTFILE) cat $(TESTDIR)/uname
+	echo "\n\n"
+	rm -rf $(TESTDIR)
