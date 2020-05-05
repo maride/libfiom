@@ -22,4 +22,9 @@ Configuration can currently only be done "on-the-fly", by setting environment va
 | `LIBFIOM_LOOSE_FAKEWRITE` | `TRUE`, `FALSE` | If set to true, simulates a successful `write()` call without writing. *This excludes `stdout`*. Chances are high that you want this kind of `write()` behaviour instead of `FULL_FAKEWRITE`, `FULL_NOWRITE` or `LOOSE_NOWRITE`. |
 | `LIBFIOM_FULL_NOWRITE` | `TRUE`, `FALSE` | If set to true, simulates a failed `write()` call. *This includes `stdout`* |
 | `LIBFIOM_LOOSE_NOWRITE` | `TRUE`, `FALSE` | If set to true, simulates a failed `write()` call. *This excludes `stdout`* |
+| `LIBFIOM_FULL_FAKEREAD` | `TRUE`, `FALSE` | If set to true, simulates a successful `read()` call without reading. *This includes `stdin`* |
+| `LIBFIOM_LOOSE_FAKEREAD` | `TRUE`, `FALSE` | If set to true, simulates a successful `read()` call without reading. *This excludes `stdin`*. Chances are high that you want this kind of `read()` behaviour instead of `FULL_FAKEREAD`, `FULL_NOREAD` or `LOOSE_NOREAD`. |
+| `LIBFIOM_FULL_NOREAD` | `TRUE`, `FALSE` | If set to true, simulates a failed `read()` call. *This includes `stdin`* |
+| `LIBFIOM_LOOSE_NOREAD` | `TRUE`, `FALSE` | If set to true, simulates a failed `read()` call. *This excludes `stdin`* |
+
 
