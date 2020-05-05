@@ -38,5 +38,4 @@ Configuration can currently only be done "on-the-fly", by setting environment va
 | `LIBFIOM_LOOSE_FAKEREAD` | `TRUE`, `FALSE` | If set to true, simulates a successful `read()` call without reading. *This excludes `stdin`*. Chances are high that you want this kind of `read()` behaviour instead of `FULL_FAKEREAD`, `FULL_NOREAD` or `LOOSE_NOREAD`. |
 | `LIBFIOM_FULL_NOREAD` | `TRUE`, `FALSE` | If set to true, simulates a failed `read()` call. *This includes `stdin`* |
 | `LIBFIOM_LOOSE_NOREAD` | `TRUE`, `FALSE` | If set to true, simulates a failed `read()` call. *This excludes `stdin`* |
-
-
+| `LIBFIOM_LIMIT_SCOPE_TO` | `<string>` | If set, limits all activity to the named executable, and let calls from other executables pass through without any modification. |

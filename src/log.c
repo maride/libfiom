@@ -3,10 +3,12 @@
 #include <stdio.h>
 #include <string.h>
 #include "config.h"
+#include "scope.h"
 
 
 void logfmt(char *fmt, ...) {
-	if(strcmp(getConfigValue("LOGSTDOUT"), "TRUE")) {
+	// Check if we should log
+	if(strcmp(getConfigValue("LOGSTDOUT"), "TRUE") || !mayModify()) {
 		return;
 	}
 
