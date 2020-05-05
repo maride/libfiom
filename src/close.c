@@ -1,5 +1,6 @@
 #define _GNU_SOURCE
 #include "close.h"
+#include "descriptors.h"
 #include "log.h"
 #include <stdio.h>
 #include <dlfcn.h>
@@ -10,7 +11,10 @@ int close(int fd) {
 		original_close = dlsym(RTLD_NEXT, "close");
 	}
 
-	logfmt("Closing file handle %i\n", fd);
+	logfmt("Closing file %s (handle %i)\n", lookupDescriptorName(fd), fd);
+
+	// Unregister descriptor
+	unregisterDescriptor(fd);
+
 	return (*original_close)(fd);
 }
-

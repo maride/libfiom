@@ -1,6 +1,7 @@
 #define _GNU_SOURCE
 #include "read.h"
 #include "config.h"
+#include "descriptors.h"
 #include "log.h"
 #include <stdio.h>
 #include <dlfcn.h>
@@ -18,7 +19,7 @@ ssize_t read(int fd, void *buf, size_t count) {
 	if(!strcmp(getConfigValue("FULL_FAKEREAD"), "TRUE") || (!strcmp(getConfigValue("LOOSE_FAKEREAD"), "TRUE") && fd != 1)) {
 		// We're not actually reading.
 		// So we just simulate that we read all bytes as requested.
-		logfmt("Fakeread 0 bytes from file handle %i\n", fd);
+		logfmt("Fakeread 0 bytes from file %s\n", lookupDescriptorName(fd));
 		return 0;
 	}
 
@@ -26,12 +27,11 @@ ssize_t read(int fd, void *buf, size_t count) {
 	// This behaviour is similar to reading from a file with unsufficient permissions (or similar)
 	if(!strcmp(getConfigValue("FULL_NOREAD"), "TRUE") || (!strcmp(getConfigValue("LOOSE_NOREAD"), "TRUE") && fd != 1)) {
 		// We simulate that the file descriptor is not suitable for reading.
-		logfmt("Noread from file handle %i\n", fd);
+		logfmt("Noread from file %s\n", lookupDescriptorName(fd));
 		return -1;
 	}
 
 	ssize_t read = (*original_read)(fd, buf, count);
-	logfmt("Read %li bytes from file handle %i\n", read, fd);
+	logfmt("Read %li bytes from file %s\n", read, lookupDescriptorName(fd));
 	return read;
 }
-
