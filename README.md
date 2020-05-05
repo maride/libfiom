@@ -13,6 +13,16 @@ If you have trouble compiling the 32bit target on a 64bit machine (missing `bits
 After a successful build, the library can be used like this:
 `LD_PRELOAD=./out/libfoam cat /etc/hostname`
 
+## Examples
+
+### Cats don't read
+
+To prohibit `cat` to read, execute it like this:
+
+`LD_PRELOAD=./out/libfiom-64.so LIBFIOM_LOOSE_FAKEREAD=TRUE cat /etc/hostname`
+
+The output should be empty.
+
 ## Configuration
 
 Configuration can currently only be done "on-the-fly", by setting environment variables before execution.
