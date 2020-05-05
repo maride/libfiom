@@ -18,4 +18,8 @@ Configuration can currently only be done "on-the-fly", by setting environment va
 | Config name | Values | Description |
 | --- | --- | --- |
 | `LIBFIOM_LOGSTDOUT` | `TRUE`, `FALSE` | If set to true, logs to `stdout` |
+| `LIBFIOM_FULL_FAKEWRITE` | `TRUE`, `FALSE` | If set to true, simulates a successful `write()` call without writing. *This includes `stdout`* |
+| `LIBFIOM_LOOSE_FAKEWRITE` | `TRUE`, `FALSE` | If set to true, simulates a successful `write()` call without writing. *This excludes `stdout`*. Chances are high that you want this kind of `write()` behaviour instead of `FULL_FAKEWRITE`, `FULL_NOWRITE` or `LOOSE_NOWRITE`. |
+| `LIBFIOM_FULL_NOWRITE` | `TRUE`, `FALSE` | If set to true, simulates a failed `write()` call. *This includes `stdout`* |
+| `LIBFIOM_LOOSE_NOWRITE` | `TRUE`, `FALSE` | If set to true, simulates a failed `write()` call. *This excludes `stdout`* |
 
