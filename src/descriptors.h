@@ -9,12 +9,13 @@ typedef struct {
 	bool isOpen;
 } DescriptorEntry;
 
-void registerCleanupFunction();
-void doCleanup();
+void registerDescriptorsCleanupFunction();
+void doDescriptorCleanup();
 
 void registerDescriptor(int fd, const char* filename);
 void unregisterDescriptor(int fd);
 DescriptorEntry* lookupDescriptor(int fd);
 const char* lookupDescriptorName(int fd);
+int lookupDescriptorFromName(const char* pathname);
 
 #endif // __descriptors_h__

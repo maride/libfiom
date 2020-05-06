@@ -1,6 +1,7 @@
 #define _GNU_SOURCE
 #include "scope.h"
 #include "config.h"
+#include "log.h"
 #include <errno.h>
 #include <string.h>
 
